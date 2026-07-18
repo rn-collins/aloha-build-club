@@ -104,7 +104,10 @@
   dialog{background:var(--card);color:var(--text);border:1px solid var(--aqua);border-radius:10px;max-width:400px;width:90%;padding:1.8rem}
   dialog::backdrop{background:rgba(21,40,31,.55)}
   dialog h3{color:var(--teal)}
-  dialog input{width:100%;margin:.4rem 0;padding:.65rem;background:var(--cream);border:1px solid var(--border);color:var(--text);border-radius:5px;font-family:inherit}
+  dialog input,dialog textarea{width:100%;margin:.4rem 0;padding:.65rem;background:var(--cream);border:1px solid var(--border);color:var(--text);border-radius:5px;font-family:inherit;font-size:.95rem}
+  dialog textarea{min-height:88px;resize:vertical}
+  dialog .alt{font-size:.8rem;color:var(--muted);margin:.8rem 0 0;text-align:center}
+  dialog .alt a{color:var(--teal-bright)}
   dialog .row{display:flex;gap:.6rem;margin-top:.6rem}
   dialog .close{background:none;border:1px solid var(--border);color:var(--muted)}
 </style>
@@ -268,8 +271,23 @@
   </form>
 </dialog>
 
+<dialog id="contact" role="dialog" aria-modal="true" aria-labelledby="contact-h">
+  <h3 id="contact-h">Contact the Architect</h3>
+  <p style="color:var(--muted);font-size:.9rem">Goes straight to RN — no list, no spam.</p>
+  <form id="contact-form">
+    <input type="text" id="c-name" aria-label="Your name (optional)" placeholder="Name (optional)" autocomplete="name">
+    <input type="email" id="c-email" aria-label="Your email" placeholder="you@email.com" required autocomplete="email">
+    <textarea id="c-msg" aria-label="Your message" placeholder="What's on your mind?"></textarea>
+    <div class="row">
+      <button type="submit" class="btn sun" style="flex:1">Send</button>
+      <button type="button" class="btn close" onclick="document.getElementById('contact').close()">Close</button>
+    </div>
+    <p class="alt">Prefer email? <a id="c-mailto" href="mailto:hello@rncollins.com">hello@rncollins.com</a></p>
+  </form>
+</dialog>
+
 <div class="contact-architect">
-  <button onclick="contactArchitect()">Contact the Architect</button>
+  <button onclick="openContact()">Contact the Architect</button>
 </div>
 
 <script>
@@ -281,6 +299,9 @@
 
   var LEAD_ENDPOINT='/api/lead';
   var SITE='build-club';
+  // Role alias that forwards to RN — never a personal address. Set up forwarding
+  // for this before launch (e.g. hello@rncollins.com → your inbox).
+  var CONTACT_EMAIL='hello@rncollins.com';
   // Paste your Stan/Gumroad checkout URLs here to send members to payment after
   // we capture their email. Leave '' to stay lead-capture-only.
   var CHECKOUT_URL={
@@ -318,13 +339,33 @@
     else { alert("You're in. Check your inbox for the room link."); }  // lead-only fallback
   });
 
-  window.contactArchitect=function(){
-    var email=prompt('Your email — the Architect will reach out:');
-    if(!email)return;
-    fetch(LEAD_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({name:'Contact',email:email,source:'contact-architect-'+SITE})}).catch(function(){});
-    alert('Sent. Talk soon.');
+  // set the visible mailto fallback link
+  var mailtoLink=document.getElementById('c-mailto');
+  if(mailtoLink){mailtoLink.href='mailto:'+CONTACT_EMAIL;mailtoLink.textContent=CONTACT_EMAIL;}
+
+  window.openContact=function(){
+    var d=document.getElementById('contact'); if(d.showModal)d.showModal(); else d.setAttribute('open','');
+    window.trackEvent('Contact Modal Opened','');
   };
+  document.getElementById('contact-form').addEventListener('submit',function(ev){
+    ev.preventDefault();
+    var name=document.getElementById('c-name').value||'', email=document.getElementById('c-email').value,
+        msg=document.getElementById('c-msg').value||'';
+    var payload={name:name||'Contact',email:email,source:'contact-architect-'+SITE,
+      message:msg+' | utm:'+JSON.stringify(window._getUTM())};
+    // Primary: capture the lead. Fallback: if the backend is down/unconfigured,
+    // open a prefilled email so the lead is NEVER silently lost.
+    fetch(LEAD_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
+      .then(function(r){ if(!r.ok) throw new Error('bad status'); })
+      .then(function(){ document.getElementById('contact').close(); alert("Sent — RN will be in touch."); })
+      .catch(function(){
+        // backend unavailable → hand off to the person's own email client
+        var body=encodeURIComponent((msg?msg+'\n\n':'')+'— '+(name||'')+' ('+email+')');
+        var subj=encodeURIComponent('Contact via Aloha Build Club');
+        window.location.href='mailto:'+CONTACT_EMAIL+'?subject='+subj+'&body='+body;
+        document.getElementById('contact').close();
+      });
+  });
 
   var ms=[25,50,75,90,100],fired={};
   window.addEventListener('scroll',function(){
