@@ -328,15 +328,26 @@
     ev.preventDefault();
     var name=document.getElementById('e-name').value||'', email=document.getElementById('e-email').value;
     var plan=window._enrollWhere;
+    try{localStorage.setItem('aloha_bc_lead',email);}catch(e){}
+    var url=(CHECKOUT_URL[plan]||CHECKOUT_URL['default']||'').trim();
     // Capture the lead first — RN keeps the email even if checkout is abandoned.
     fetch(LEAD_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},
       body:JSON.stringify({name:name,email:email,source:'enroll-intent-'+SITE+'-'+plan,
-        message:'Founding seat interest ('+plan+') | utm:'+JSON.stringify(window._getUTM())})}).catch(function(){});
-    try{localStorage.setItem('aloha_bc_lead',email);}catch(e){}
-    document.getElementById('enroll').close();
-    var url=(CHECKOUT_URL[plan]||CHECKOUT_URL['default']||'').trim();
-    if(url){ window.location.href=url; }          // redirect to Stan/Gumroad once URL is set
-    else { alert("You're in. Check your inbox for the room link."); }  // lead-only fallback
+        message:'Founding seat interest ('+plan+') | utm:'+JSON.stringify(window._getUTM())})})
+      .then(function(r){ if(!r.ok) throw new Error('bad status'); })
+      .then(function(){
+        document.getElementById('enroll').close();
+        if(url){ window.location.href=url; }        // redirect to Stan/Gumroad once URL is set
+        else { alert("You're in. Check your inbox for the room link."); }
+      })
+      .catch(function(){
+        document.getElementById('enroll').close();
+        if(url){ window.location.href=url; return; } // checkout provider will capture the email
+        // No backend + no checkout → fall back to email so the seat request isn't lost.
+        var body=encodeURIComponent('I want a founding seat ('+plan+').\n\n— '+(name||'')+' ('+email+')');
+        var subj=encodeURIComponent('Founding seat — Aloha Build Club');
+        window.location.href='mailto:'+CONTACT_EMAIL+'?subject='+subj+'&body='+body;
+      });
   });
 
   // set the visible mailto fallback link
