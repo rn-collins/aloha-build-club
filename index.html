@@ -81,7 +81,7 @@
   .ev cite{display:block;font-style:normal;font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--teal-bright);margin-top:.7rem;letter-spacing:.03em}
   .disclaimer{max-width:720px;margin:1.6rem auto 0;font-size:.82rem;color:var(--muted);text-align:center;font-style:italic}
   .price{display:grid;gap:1.1rem;max-width:640px;margin:0 auto}
-  @media(min-width:700px){.price{grid-template-columns:1fr 1fr}}
+  @media(min-width:820px){.price{grid-template-columns:1fr 1fr 1fr}}
   .plan{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:2rem;text-align:center}
   .plan.featured{border-color:var(--aqua);box-shadow:0 6px 24px rgba(21,53,41,.08)}
   .plan .amt{font-size:2.6rem;font-weight:600;font-family:'Fraunces',serif;color:var(--forest)}
@@ -127,7 +127,7 @@
       <h1>You have six half-finished things.<br><span class="sun">Today you ship one.</span></h1>
       <p class="lede">Aloha Build Club is the daily body-doubling room for people building with AI. You show up, build alongside others in real time, and an AI co-pilot keeps you unstuck — so the thing you keep avoiding finally goes live.</p>
       <button class="btn sun" onclick="openEnroll('hero')">Claim a founding seat</button>
-      <p class="mono" style="margin-top:1.4rem;color:var(--cream-muted)">Founding cohort · limited seats · rate locked for life</p>
+      <p class="mono" style="margin-top:1.4rem;color:var(--cream-muted)">Only 25 founding seats · rate locked for life</p>
     </div>
   </section>
 
@@ -136,6 +136,7 @@
       <h2>The problem isn't skill. It's starting.</h2>
       <p style="color:var(--muted);max-width:680px">AI gave you infinite ideas and infinite drafts. What it didn't give you is momentum. You open the tab, you tinker, you close it. The gap between "I could build that" and "I shipped it" is where most projects quietly die — alone, in a browser tab, next to a to-do you keep rescheduling.</p>
       <p style="color:var(--muted);max-width:680px">Building is mostly showing up, and only a little bit skill. You already have the skill. What you're missing is the room.</p>
+      <p style="font-family:'Fraunces',serif;font-size:1.35rem;color:var(--forest);font-weight:600;margin-top:1rem">The enemy has a name: the Someday Pile. This is where it dies.</p>
     </div>
   </section>
 
@@ -146,7 +147,7 @@
         <div class="step"><span class="t">min 0–5</span><span class="d"><strong>Set the target</strong><span>Your AI co-pilot reads your project and hands you today's single next step. No blank screen, no "where do I start."</span></span></div>
         <div class="step"><span class="t">min 5–15</span><span class="d"><strong>Unblock together</strong><span>A quick round of what everyone's shipping today. Stuck? The room and the co-pilot get you moving.</span></span></div>
         <div class="step"><span class="t">min 15–55</span><span class="d"><strong>Build</strong><span>Heads-down creation time. Cameras optional, presence real. Everyone building, nobody drifting.</span></span></div>
-        <div class="step"><span class="t">min 55–60</span><span class="d"><strong>Ship &amp; show</strong><span>Push it live. Log the win. The room sees it — so it actually exists.</span></span></div>
+        <div class="step"><span class="t">min 55–60</span><span class="d"><strong>Ring the ship bell</strong><span>Push it live and ring the bell. The room sees it — so it actually exists — and it lands on the Shipped List.</span></span></div>
       </div>
     </div>
   </section>
@@ -189,7 +190,7 @@
         <div class="card"><h3>Your AI co-pilot</h3><p>Knows your project and goal. Generates your next step, drafts with you, reviews your work, and talks you through blocks in real time.</p></div>
         <div class="card"><h3>An engagement pod</h3><p>A private group that actually looks at what you ship. Your launches don't die at zero — real humans respond.</p></div>
         <div class="card"><h3>Accountability that sticks</h3><p>Same time, every day. Momentum nudges when you go quiet. Consistency becomes the default, not the fight.</p></div>
-        <div class="card"><h3>Ship logs</h3><p>Every session, an auto-summary of what you shipped. Watch your build streak — and your body of work — grow.</p></div>
+        <div class="card"><h3>The Friday Shipped List</h3><p>Every session logs what you shipped; every Friday the room's wins go on the Shipped List. Watch your streak — and your body of work — grow.</p></div>
         <div class="card"><h3>For anyone building</h3><p>Founders, creators, indie builders, students, job-seekers. If you're making something with AI and keep stalling, this is the room.</p></div>
       </div>
     </div>
@@ -222,6 +223,18 @@
             <li>Early access to new build tracks</li>
           </ul>
           <button class="btn sun" style="width:100%" onclick="openEnroll('annual')">Join annual</button>
+        </div>
+        <div class="plan">
+          <span class="tag" style="background:var(--forest)">I can expense this</span>
+          <h3>Pro</h3>
+          <div class="amt">$99<span class="per"> / month</span></div>
+          <ul>
+            <li>Everything in the membership</li>
+            <li>A monthly 1:1 with the Architect</li>
+            <li>Priority feedback on what you ship</li>
+            <li>An expense-justification letter for your L&amp;D budget</li>
+          </ul>
+          <button class="btn" style="width:100%" onclick="openEnroll('pro')">Join Pro</button>
         </div>
       </div>
     </div>
@@ -307,6 +320,7 @@
   var CHECKOUT_URL={
     monthly:'',           // e.g. https://stan.store/rncollins/p/build-club-monthly
     annual:'',            // e.g. https://stan.store/rncollins/p/build-club-annual
+    pro:'',               // e.g. https://stan.store/rncollins/p/build-club-pro
     'default':''
   };
 
@@ -320,7 +334,7 @@
 
   window._enrollWhere='default';
   window.openEnroll=function(where){
-    window._enrollWhere=(where==='monthly'||where==='annual')?where:'default';
+    window._enrollWhere=(where==='monthly'||where==='annual'||where==='pro')?where:'default';
     var d=document.getElementById('enroll'); if(d.showModal)d.showModal(); else d.setAttribute('open','');
     window.trackEvent('Enroll Modal Opened',where);
   };
