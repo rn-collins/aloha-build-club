@@ -1,0 +1,9 @@
+# Keep internal docs + dev junk OUT of the public deployment.
+# These remain in the (private) repo for reference but are never served.
+*.md
+*.ics
+research/
+og.svg
+.DS_Store
+.gitignore
+DEPLOY-NOW.md
