@@ -131,6 +131,23 @@
   .fortwo li{margin:.35rem 0;padding-left:1.4rem;position:relative;color:var(--muted);font-size:.92rem}
   .fortwo .yes li:before{content:"\2713";position:absolute;left:0;color:var(--teal)}
   .fortwo .no li:before{content:"\2014";position:absolute;left:0;color:var(--muted)}
+  /* mobile polish: tighter rhythm, comfortable nav + tap targets */
+  @media(max-width:560px){
+    header.nav{padding:.8rem 1rem}
+    .brand{font-size:.95rem}
+    header.nav .btn{padding:.6rem .85rem;font-size:.68rem}
+    .hero{padding:3.4rem 0 3rem}
+    .hero h1{font-size:clamp(2rem,9vw,2.6rem)}
+    .hero p.lede{font-size:1.06rem}
+    section{padding:2.7rem 0}
+    .wrap{padding:0 1.15rem}
+    .plan{padding:1.6rem}
+    .who{padding:1.4rem 1.5rem}
+    .contact-architect{bottom:1rem;right:1rem}
+    .contact-architect button{padding:.7rem 1.1rem}
+    .fortwo li,.plan li{padding-top:.45rem;padding-bottom:.45rem}
+    footer a,.who .links a{display:inline-block;padding:.15rem 0}
+  }
   @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition-duration:.001ms!important;animation-duration:.001ms!important;animation-iteration-count:1!important}}
 </style>
 <script>(function(){var p=new URLSearchParams(location.search),u={};['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(function(k){if(p.get(k))u[k]=p.get(k);});if(Object.keys(u).length)sessionStorage.setItem('rn_utm',JSON.stringify(u));window._getUTM=function(){try{return JSON.parse(sessionStorage.getItem('rn_utm')||'{}')}catch(e){return{}}};window.addEventListener('load',function(){fetch('/api/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({event:'page_view',source:'aloha-build-club',referrer:document.referrer||'direct',utm:window._getUTM()})}).catch(function(){});});var ms=[25,50,75,90],fired={};window.addEventListener('scroll',function(){var h=document.body.scrollHeight-window.innerHeight;if(h<=0)return;var pct=Math.round((window.scrollY/h)*100);ms.forEach(function(m){if(pct>=m&&!fired[m]){fired[m]=1;fetch('/api/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({event:'scroll_depth',source:'aloha-build-club',depth:m+'%'})}).catch(function(){});}});},{passive:true});})()</script>
