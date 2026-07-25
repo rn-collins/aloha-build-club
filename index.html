@@ -111,6 +111,27 @@
   dialog .alt a{color:var(--teal-bright)}
   dialog .row{display:flex;gap:.6rem;margin-top:.6rem}
   dialog .close{background:none;border:1px solid var(--border);color:var(--muted)}
+  .privacy-note{font-size:.75rem;color:var(--muted);margin:.7rem 0 0;text-align:center}
+  .privacy-note a{color:var(--teal-bright)}
+  .okmsg{display:none;margin-top:.7rem;font-size:.9rem;color:#0F5C4C;background:#E7F3EF;border:1px solid #B9E0D5;border-radius:6px;padding:.65rem .85rem}
+  .okmsg.show{display:block}
+  .ev cite a{color:var(--teal-bright);text-decoration:underline;text-underline-offset:2px}
+  .ev-more{text-align:center;margin-top:1rem;font-size:.8rem}
+  .who{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.7rem 1.8rem;display:grid;gap:1.3rem;align-items:start;max-width:820px;margin:1.5rem auto 0}
+  @media(min-width:640px){.who{grid-template-columns:auto 1fr}}
+  .who .badge{width:64px;height:64px;border-radius:14px;background:var(--forest);color:var(--cream);display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:1.7rem;flex-shrink:0}
+  .who h3{font-size:1.2rem;margin-bottom:.15rem}
+  .who p{color:var(--muted);margin:.35rem 0 0;font-size:.95rem}
+  .who .links{margin-top:.7rem;font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.03em}
+  .fortwo{display:grid;gap:1rem;max-width:760px;margin:1.4rem auto 0}
+  @media(min-width:640px){.fortwo{grid-template-columns:1fr 1fr}}
+  .fortwo>div{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.3rem 1.4rem}
+  .fortwo h3{font-size:1rem;margin-bottom:.5rem}
+  .fortwo ul{margin:0;padding:0;list-style:none}
+  .fortwo li{margin:.35rem 0;padding-left:1.4rem;position:relative;color:var(--muted);font-size:.92rem}
+  .fortwo .yes li:before{content:"\2713";position:absolute;left:0;color:var(--teal)}
+  .fortwo .no li:before{content:"\2014";position:absolute;left:0;color:var(--muted)}
+  @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition-duration:.001ms!important;animation-duration:.001ms!important;animation-iteration-count:1!important}}
 </style>
 <script>(function(){var p=new URLSearchParams(location.search),u={};['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(function(k){if(p.get(k))u[k]=p.get(k);});if(Object.keys(u).length)sessionStorage.setItem('rn_utm',JSON.stringify(u));window._getUTM=function(){try{return JSON.parse(sessionStorage.getItem('rn_utm')||'{}')}catch(e){return{}}};window.addEventListener('load',function(){fetch('/api/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({event:'page_view',source:'aloha-build-club',referrer:document.referrer||'direct',utm:window._getUTM()})}).catch(function(){});});var ms=[25,50,75,90],fired={};window.addEventListener('scroll',function(){var h=document.body.scrollHeight-window.innerHeight;if(h<=0)return;var pct=Math.round((window.scrollY/h)*100);ms.forEach(function(m){if(pct>=m&&!fired[m]){fired[m]=1;fetch('/api/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({event:'scroll_depth',source:'aloha-build-club',depth:m+'%'})}).catch(function(){});}});},{passive:true});})()</script>
 </head>
@@ -162,25 +183,25 @@
         <div class="ev">
           <span class="stat">+16–32%</span>
           <p>The mere presence of another person working nearby measurably raises output — the "peer effect."</p>
-          <cite>Falk &amp; Ichino, Journal of Labor Economics (2006)</cite>
+          <cite><a href="https://www.jstor.org/stable/10.1086/497818" target="_blank" rel="noopener">Falk &amp; Ichino, Journal of Labor Economics (2006)</a></cite>
         </div>
         <div class="ev">
           <span class="stat">76% vs 43%</span>
           <p>People who wrote their goals and sent weekly progress to a friend hit 76% of them — versus 43% for those who just kept goals in their head.</p>
-          <cite>Matthews, Dominican University (2015), n=267</cite>
+          <cite><a href="https://scholar.dominican.edu/psychology-faculty-conference-presentations/3/" target="_blank" rel="noopener">Matthews, Dominican University (2015), n=267</a></cite>
         </div>
         <div class="ev">
           <span class="stat">~2–3×</span>
           <p>A standing accountability appointment — not just intent — is repeatedly linked to multi-fold jumps in follow-through and cooperation.</p>
-          <cite>Fehr &amp; Gächter, American Economic Review (2000); ASTD</cite>
+          <cite><a href="https://www.jstor.org/stable/117319" target="_blank" rel="noopener">Fehr &amp; Gächter, American Economic Review (2000)</a></cite>
         </div>
         <div class="ev">
           <span class="stat">9M+</span>
-          <p>Virtual body-doubling sessions run on Focusmate across 150+ countries — proof the daily-room model works at scale. We add AI and a build focus on top.</p>
-          <cite>Focusmate, company data (2026)</cite>
+          <p>Virtual body-doubling sessions have run on Focusmate across 150+ countries — outside evidence that the daily-room model works at scale. It's their number, not ours; we add a build focus and a host on top.</p>
+          <cite><a href="https://www.focusmate.com/science/" target="_blank" rel="noopener">Focusmate, company figures (external context)</a></cite>
         </div>
       </div>
-      <p class="disclaimer">We sell consistency, not outcomes. Body doubling has strong theoretical and observational support; large controlled trials are still emerging. We won't promise you an income — we'll help you show up every day, which is the part that actually compounds.</p>
+      <p class="disclaimer">We sell consistency, not outcomes. Presence and accountability are well-evidenced; body doubling itself has strong observational support but few large controlled trials, so we don't claim a proven "X% more productive." We won't promise you an income — we'll help you show up every day, which is the part that actually compounds. Every figure above links to its source.</p>
     </div>
   </section>
 
@@ -194,6 +215,43 @@
         <div class="card"><h3>Accountability that sticks</h3><p>Same time, every day. Momentum nudges when you go quiet. Consistency becomes the default, not the fight.</p></div>
         <div class="card"><h3>The Friday Shipped List</h3><p>Every session logs what you shipped; every Friday the room's wins go on the Shipped List. Watch your streak — and your body of work — grow.</p></div>
         <div class="card"><h3>For anyone building</h3><p>Founders, creators, indie builders, students, job-seekers. If you're making something with AI and keep stalling, this is the room.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>Who runs the room</h2>
+      <div class="who">
+        <div class="badge" aria-hidden="true">RN</div>
+        <div>
+          <h3>RN Collins</h3>
+          <p>I build and ship AI tools for a living — monitoring systems, intelligence dashboards, and interactive products, all live and doing real work under Aloha AI. Build Club is the room I wanted for my own work: a place to show up daily and actually finish things, instead of letting them rot in a tab. I host every session, hand out the next step, and answer in the pod. The "AI" part is a co-pilot we use together in the room — not a bot pretending to be a mentor.</p>
+          <p class="links"><a href="https://rn-portfolio-khaki.vercel.app" target="_blank" rel="noopener">See what I build →</a> &nbsp;·&nbsp; <a href="https://linkedin.com/in/rn-collins" target="_blank" rel="noopener">LinkedIn</a></p>
+        </div>
+      </div>
+      <p style="text-align:center;color:var(--muted);font-size:.85rem;margin-top:1.2rem">This is a founding cohort forming now — capped at 25 on purpose, so the room stays small enough to actually know each other.</p>
+
+      <h2 style="margin-top:3rem">Who this is for — and who it isn't</h2>
+      <div class="fortwo">
+        <div>
+          <h3>You'll fit if you…</h3>
+          <ul class="yes">
+            <li>are building something with AI and keep stalling before it ships</li>
+            <li>do better with people around than alone with your willpower</li>
+            <li>want a daily habit, not another course to half-watch</li>
+            <li>will show up most days and put real work on the screen</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Skip it if you…</h3>
+          <ul class="no">
+            <li>want a passive course, templates, or a "watch and learn" library</li>
+            <li>are looking for a done-for-you service or an income guarantee</li>
+            <li>can't commit to showing up more than once or twice</li>
+            <li>need 1:1 coaching more than a shared working room (the Pro tier adds a monthly 1:1, but the room is the core)</li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
@@ -251,6 +309,7 @@
         <details><summary>Do I need to be technical?</summary><p>No. If you're using AI tools to build or ship something and you keep stalling, you're exactly who this is for.</p></details>
         <details><summary>Will my price go up?</summary><p>Not for founding members. You lock in the rate you join at, for as long as you stay.</p></details>
         <details><summary>How is this different from a course?</summary><p>It isn't a course. There's nothing to "watch." It's a room you show up to and do the work in, with people and an AI that keep you moving. Information is free now — momentum is the scarce thing.</p></details>
+        <details><summary>What do you do with my email and data?</summary><p>Your email goes straight to RN so I can send your room link and founding rate — that's the only use. No selling, no marketing list, no third-party ad tracking. It's stored privately to run the club, and I'll delete it whenever you ask. The site uses lightweight, privacy-respecting analytics (page views and scroll depth, no cross-site profiling). When you join a paid plan, payment is handled by the checkout provider — card details never touch this site.</p></details>
       </div>
     </div>
   </section>
@@ -271,6 +330,7 @@
     <a href="https://linkedin.com/in/rn-collins" target="_blank" rel="noopener">LinkedIn</a>
   </div>
   <div>Aloha Build Club — a daily build room by Aloha AI, under RN Collins LLC.</div>
+  <div style="margin-top:.55rem;max-width:640px;margin-inline:auto;line-height:1.7">Your email is used only to contact you about the room — no ad tracking, no selling data. Analytics are lightweight and privacy-respecting. Questions about your data? <button onclick="openContact()" style="background:none;border:none;color:var(--teal-bright);font:inherit;cursor:pointer;padding:0;text-decoration:underline">Contact the Architect</button>.</div>
 </footer>
 
 <dialog id="enroll" role="dialog" aria-modal="true" aria-labelledby="enroll-h">
@@ -283,6 +343,8 @@
       <button type="submit" class="btn sun" style="flex:1">Send me the link</button>
       <button type="button" class="btn close" onclick="document.getElementById('enroll').close()">Close</button>
     </div>
+    <div class="okmsg" id="enroll-ok" role="status" aria-live="polite"></div>
+    <p class="privacy-note">Your email goes only to RN, to send your room link — no list, no spam, delete on request.</p>
   </form>
 </dialog>
 
@@ -297,6 +359,7 @@
       <button type="submit" class="btn sun" style="flex:1">Send</button>
       <button type="button" class="btn close" onclick="document.getElementById('contact').close()">Close</button>
     </div>
+    <div class="okmsg" id="contact-ok" role="status" aria-live="polite"></div>
     <p class="alt">Prefer email? <a id="c-mailto" href="mailto:collins.ra@northeastern.edu">collins.ra@northeastern.edu</a></p>
   </form>
 </dialog>
@@ -352,9 +415,11 @@
         message:'Founding seat interest ('+plan+') | utm:'+JSON.stringify(window._getUTM())})})
       .then(function(r){ if(!r.ok) throw new Error('bad status'); })
       .then(function(){
-        document.getElementById('enroll').close();
-        if(url){ window.location.href=url; }        // redirect to Stan/Gumroad once URL is set
-        else { alert("You're on the founding list — I'll be in touch personally with your room link."); }
+        if(url){ window.location.href=url; return; }  // redirect to Stan/Gumroad once URL is set
+        var ok=document.getElementById('enroll-ok');
+        ok.textContent="🌴 You're on the founding list — I'll email your room link and founding rate personally, usually within a day.";
+        ok.classList.add('show');
+        document.getElementById('enroll-form').reset();
       })
       .catch(function(){
         document.getElementById('enroll').close();
@@ -384,7 +449,12 @@
     // open a prefilled email so the lead is NEVER silently lost.
     fetch(LEAD_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
       .then(function(r){ if(!r.ok) throw new Error('bad status'); })
-      .then(function(){ document.getElementById('contact').close(); alert("Sent — RN will be in touch."); })
+      .then(function(){
+        var ok=document.getElementById('contact-ok');
+        ok.textContent="Sent — thanks. I'll be in touch personally.";
+        ok.classList.add('show');
+        document.getElementById('contact-form').reset();
+      })
       .catch(function(){
         // backend unavailable → hand off to the person's own email client
         var body=encodeURIComponent((msg?msg+'\n\n':'')+'— '+(name||'')+' ('+email+')');
