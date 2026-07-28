@@ -391,7 +391,7 @@
   if(Object.keys(u).length)sessionStorage.setItem('rn_utm',JSON.stringify(u));
   window._getUTM=function(){try{return JSON.parse(sessionStorage.getItem('rn_utm')||'{}')}catch(e){return {}}};
 
-  var LEAD_ENDPOINT='/api/lead';
+  var LEAD_ENDPOINT='https://rn-api.vercel.app/api/lead';
   var SITE='build-club';
   // Paste your Stan/Gumroad checkout URLs here to send members to payment after
   // we capture their email. Leave '' to stay lead-capture-only.
@@ -496,7 +496,7 @@
     document.getElementById('ca-form-aloha-build-club').addEventListener('submit',function(e){
       e.preventDefault();
       var f=e.target;
-      fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},
+      fetch('https://rn-api.vercel.app/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},
         body:JSON.stringify({name:f.name.value,email:f.email.value,message:f.message.value,source:'aloha-build-club'})
       }).then(function(){
         f.reset();
