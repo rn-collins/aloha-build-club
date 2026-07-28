@@ -377,7 +377,6 @@
       <button type="button" class="btn close" onclick="document.getElementById('contact').close()">Close</button>
     </div>
     <div class="okmsg" id="contact-ok" role="status" aria-live="polite"></div>
-    <p class="alt">Prefer email? <a id="c-mailto" href="mailto:collins.ra@northeastern.edu">collins.ra@northeastern.edu</a></p>
   </form>
 </dialog>
 
@@ -394,9 +393,6 @@
 
   var LEAD_ENDPOINT='/api/lead';
   var SITE='build-club';
-  // Role alias that forwards to RN — never a personal address. Set up forwarding
-  // for this before launch (e.g. hello@rncollins.com → your inbox).
-  var CONTACT_EMAIL='collins.ra@northeastern.edu';
   // Paste your Stan/Gumroad checkout URLs here to send members to payment after
   // we capture their email. Leave '' to stay lead-capture-only.
   var CHECKOUT_URL={
@@ -439,18 +435,13 @@
         document.getElementById('enroll-form').reset();
       })
       .catch(function(){
-        document.getElementById('enroll').close();
-        if(url){ window.location.href=url; return; } // checkout provider will capture the email
-        // No backend + no checkout → fall back to email so the seat request isn't lost.
-        var body=encodeURIComponent('I want a founding seat ('+plan+').\n\n— '+(name||'')+' ('+email+')');
-        var subj=encodeURIComponent('Founding seat — Aloha Build Club');
-        window.location.href='mailto:'+CONTACT_EMAIL+'?subject='+subj+'&body='+body;
+        if(url){ document.getElementById('enroll').close(); window.location.href=url; return; } // checkout provider will capture the email
+        // No backend + no checkout → keep the modal open and let them know, so the seat request isn't lost.
+        var ok=document.getElementById('enroll-ok');
+        ok.textContent="Something went wrong saving your seat request — please try again in a moment.";
+        ok.classList.add('show');
       });
   });
-
-  // set the visible mailto fallback link
-  var mailtoLink=document.getElementById('c-mailto');
-  if(mailtoLink){mailtoLink.href='mailto:'+CONTACT_EMAIL;mailtoLink.textContent=CONTACT_EMAIL;}
 
   window.openContact=function(){
     var d=document.getElementById('contact'); if(d.showModal)d.showModal(); else d.setAttribute('open','');
@@ -473,11 +464,10 @@
         document.getElementById('contact-form').reset();
       })
       .catch(function(){
-        // backend unavailable → hand off to the person's own email client
-        var body=encodeURIComponent((msg?msg+'\n\n':'')+'— '+(name||'')+' ('+email+')');
-        var subj=encodeURIComponent('Contact via Aloha Build Club');
-        window.location.href='mailto:'+CONTACT_EMAIL+'?subject='+subj+'&body='+body;
-        document.getElementById('contact').close();
+        // backend unavailable → let them know rather than silently losing the message
+        var ok=document.getElementById('contact-ok');
+        ok.textContent="Something went wrong sending your message — please try again in a moment.";
+        ok.classList.add('show');
       });
   });
 
