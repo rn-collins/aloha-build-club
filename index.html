@@ -506,9 +506,12 @@
   <div style="background:#fff;border-radius:12px;padding:32px;max-width:480px;width:100%;box-shadow:0 8px 32px rgba(0,0,0,0.2)">
     <h3 style="margin:0 0 16px;font-size:20px;color:#111">Contact the Architect</h3>
     <form id="ca-form-aloha-build-club">
-      <input name="name" placeholder="Name" required style="width:100%;margin-bottom:10px;padding:10px 12px;border:1px solid #ddd;border-radius:6px;box-sizing:border-box;font-size:14px">
-      <input name="email" type="email" placeholder="Email" required style="width:100%;margin-bottom:10px;padding:10px 12px;border:1px solid #ddd;border-radius:6px;box-sizing:border-box;font-size:14px">
-      <textarea name="message" placeholder="Message" rows="4" style="width:100%;margin-bottom:16px;padding:10px 12px;border:1px solid #ddd;border-radius:6px;box-sizing:border-box;font-size:14px;resize:vertical"></textarea>
+      <label for="ca-name-abc" style="display:block;font-size:13px;font-weight:600;color:#111;margin-bottom:4px">Name</label>
+      <input id="ca-name-abc" name="name" placeholder="Name" required style="width:100%;margin-bottom:10px;padding:10px 12px;border:1px solid #ddd;border-radius:6px;box-sizing:border-box;font-size:14px">
+      <label for="ca-email-abc" style="display:block;font-size:13px;font-weight:600;color:#111;margin-bottom:4px">Email</label>
+      <input id="ca-email-abc" name="email" type="email" placeholder="Email" required style="width:100%;margin-bottom:10px;padding:10px 12px;border:1px solid #ddd;border-radius:6px;box-sizing:border-box;font-size:14px">
+      <label for="ca-message-abc" style="display:block;font-size:13px;font-weight:600;color:#111;margin-bottom:4px">Message</label>
+      <textarea id="ca-message-abc" name="message" placeholder="Message" rows="4" style="width:100%;margin-bottom:16px;padding:10px 12px;border:1px solid #ddd;border-radius:6px;box-sizing:border-box;font-size:14px;resize:vertical"></textarea>
       <button type="submit" style="background:#1a1a1a;color:#fff;border:none;padding:10px 24px;border-radius:6px;cursor:pointer;font-size:14px">Send</button>
       <button type="button" onclick="document.getElementById('ca-modal-aloha-build-club').style.display='none'" style="margin-left:8px;background:none;border:1px solid #ccc;color:#333;padding:10px 24px;border-radius:6px;cursor:pointer;font-size:14px">Cancel</button>
     </form>
